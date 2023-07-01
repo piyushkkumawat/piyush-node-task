@@ -3,7 +3,7 @@ Project Setup
 Install node module 
 -npm i
 Start project:
-nom start
+npm start
 
 Create database in sql
 database name: task_db
