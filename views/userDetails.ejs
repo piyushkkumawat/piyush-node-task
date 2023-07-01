@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/css/index.css">
+
+    <title>User Details</title>
+</head>
+
+<body>
+    <h1>User Details</h1>
+
+    <div>
+        <img src="<%= user.profile_pic %>" alt="Profile Picture" class="profile-pic">
+        <!-- <img src="http://localhost:3000/image/avatarImg.jpg" alt="Profile Picture" class="profile-pic"> -->
+
+    </div>
+
+    <div class="user-info">
+        <label for="name">Name:</label>
+        <span>
+            <%= user.name %>
+        </span>
+    </div>
+
+    <div class="user-info">
+        <label for="email">Email:</label>
+        <span>
+            <%= user.email %>
+        </span>
+    </div>
+
+    <div class="user-info">
+        <label for="gender">Gender:</label>
+        <span>
+            <%= user.gender %>
+        </span>
+    </div>
+
+    <div class="user-info">
+        <label for="phone">Phone:</label>
+        <span>
+            <%= user.phone %>
+        </span>
+    </div>
+
+    <div class="logout-btn">
+        <a href="/logout">Logout</a>
+        <a href="/deleteUser/<%= user.id %>">Delete My Account</a>
+        <a href="/changepassword/<%= user.id %>">Change Password</a>
+
+    </div>
+
+    <div class="edit-btn">
+        <a href="/editProfile/<%= user.id %>">Edit</a>
+    </div>
+
+
+</body>
+
+</html>

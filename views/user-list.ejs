@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/css/index.css">
+    <title>User List</title>
+</head>
+
+<body>
+    <h1>User List</h1>
+    <form action="/download-csv" method="get">
+        <button id="download-csv" class="download-btn">Download CSV</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th><a href="?sort=id:asc">ID</a></th>
+                <th><a href="?sort=name:asc">Name</a></th>
+                <th><a href="?sort=email:asc">Email</a></th>
+                <th><a href="?sort=gender:asc">Gender</a></th>
+                <th><a href="?sort=phone:asc">Phone</a></th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach((user) => { %>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.gender %></td>
+                <td><%= user.phone %></td>
+
+                <td>
+                    <select class="status-dropdown" data-userid="<%= user.id %>">
+                        <option value="1" <%= user.status === 1 ? 'selected' : '' %>>Pending</option>
+                        <option value="2" <%= user.status === 2 ? 'selected' : '' %>>Active</option>
+                        <option value="0" <%= user.status === 0 ? 'selected' : '' %>>Inactive</option>
+                    </select>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+
+<script>
+    // Get all the status dropdown elements
+    const statusDropdowns = document.querySelectorAll('.status-dropdown');
+
+    statusDropdowns.forEach((dropdown) => {
+        dropdown.addEventListener('change', (event) => {
+            const userId = dropdown.dataset.userid;
+            const selectedStatus = event.target.value;
+
+            fetch(`/userUpdate/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ status: selectedStatus }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        });
+    });
+</script>
+
+</html>
