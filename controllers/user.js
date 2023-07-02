@@ -10,10 +10,8 @@ exports.renderIndex = (req, res) => {
   exports.renderChangePassword = async(req, res) => {
     const { id } = req.params;
     try {
-      // Find the user based on the ID
       const user = await UserModal.findOne({ where: { id } });
       if (!user) {
-        // User not found
         return res.status(404).json({ message: 'User not found' });
       }
   
@@ -32,15 +30,12 @@ exports.renderIndex = (req, res) => {
   exports.renderUserDetails = async(req, res) => {
     const { id } = req.params;
     try {
-      // Find the user based on the ID
       const user = await UserModal.findOne({ where: { id } });
   
       if (!user) {
-        // User not found
         return res.status(404).json({ message: 'User not found' });
       }
   
-      // Render the 'userDetails template and pass the users data
       return res.render('userDetails', { user });
     } catch (error) {
       console.error('Error fetching user:', error);
@@ -50,10 +45,8 @@ exports.renderIndex = (req, res) => {
 
   exports.renderUserList = async(req, res) => {
     try {
-      // Fetch all users from the database
       const users = await UserModal.findAll();
   
-      // Render the 'user-list' template and pass the users data
      return res.render('user-list', { users });
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -65,15 +58,12 @@ exports.renderIndex = (req, res) => {
   exports.renderUpdateuser = async(req, res) => {
     const { id } = req.params;
     try {
-      // Find the user based on the ID
       const user = await UserModal.findOne({ where: { id } });
   
       if (!user) {
-        // User not found
         return res.status(404).json({ message: 'User not found' });
       }
   
-      // Render the 'user-list' template and pass the users data
       res.render('editProfile', { user });
     } catch (error) {
       console.error('Error fetching user:', error);

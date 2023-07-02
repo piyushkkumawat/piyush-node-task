@@ -5,13 +5,12 @@ const userForm = require('../controllers/user');
 const user = require("../controllers/user.controller")
 
 
-// Create a multer storage configuration
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, 'uploads'); // Specify the destination directory for uploaded files
+      cb(null, 'uploads'); 
     },
     filename: (req, file, cb) => {
-      cb(null, file.originalname); // Use the original file name for the uploaded file
+      cb(null, file.originalname);
     },
   });
   

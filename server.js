@@ -13,7 +13,6 @@ const app = express();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-// Serve static files from the 'public' directory
 app.use('/image', express.static('./public/uploads'));
 app.use(express.static('public'));
 
